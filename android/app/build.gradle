@@ -1,10 +1,10 @@
-apply plugin: 'com.android.application'
+﻿apply plugin: 'com.android.application'
 
 def releaseKeystore = file("xingce-release.p12")
 
-// versionCode/Name 由 app/public/shared/version.js 的 APP_VERSION 推导：
-// APP_VERSION = 0.3.0.YYYYMMDDHHmmss -> versionName 用全串，versionCode 用「距 2020-01-01 的分钟数」。
-// 每分钟 +1，单调递增且远小于 int32 上限，改版本只需 npm run bump。
+// versionCode/Name 鐢?app/public/shared/version.js 鐨?APP_VERSION 鎺ㄥ锛?
+// APP_VERSION = 0.3.0.YYYYMMDDHHmmss -> versionName 鐢ㄥ叏涓诧紝versionCode 鐢ㄣ€岃窛 2020-01-01 鐨勫垎閽熸暟銆嶃€?
+// 姣忓垎閽?+1锛屽崟璋冮€掑涓旇繙灏忎簬 int32 涓婇檺锛屾敼鐗堟湰鍙渶 npm run bump銆?
 def appVersionFile = file("${rootProject.projectDir}/../app/public/shared/version.js")
 def appVersionName = "1.0"
 def appVersionCode = 1
@@ -17,17 +17,17 @@ if (appVersionFile.exists()) {
         def minutesSinceEpoch = (stamp.parse(matcher.group(2)).time / 60000L) as long
         appVersionCode = (int) (minutesSinceEpoch - 26297280L)
     } else {
-        logger.warn("version.js 里没有 APP_VERSION 时间戳，versionCode 回退为 1")
+        logger.warn("version.js 閲屾病鏈?APP_VERSION 鏃堕棿鎴筹紝versionCode 鍥為€€涓?1")
     }
 } else {
-    logger.warn("找不到 ${appVersionFile}，versionCode 回退为 1")
+    logger.warn("鎵句笉鍒?${appVersionFile}锛寁ersionCode 鍥為€€涓?1")
 }
 
 android {
-    namespace = "com.xingce.analyzer"
+    namespace = "com.xingce.mockai"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.xingce.analyzer"
+        applicationId "com.xingce.mockai"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode appVersionCode

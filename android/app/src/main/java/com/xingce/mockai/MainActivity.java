@@ -1,4 +1,4 @@
-package com.xingce.analyzer;
+﻿package com.xingce.mockai;
 
 import com.getcapacitor.BridgeActivity;
 

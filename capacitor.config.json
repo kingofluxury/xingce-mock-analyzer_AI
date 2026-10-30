@@ -1,6 +1,6 @@
-{
-  "appId": "com.xingce.analyzer",
-  "appName": "行测模考分析器",
+﻿{
+  "appId": "com.xingce.mockai",
+  "appName": "琛屾祴妯¤€冨垎鏋愬櫒",
   "webDir": "www",
   "server": {
     "androidScheme": "https"
