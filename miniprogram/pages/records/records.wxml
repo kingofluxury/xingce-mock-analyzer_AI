@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="nav">
+    <navigator class="nav-item" url="/pages/index/index">录入</navigator>
+    <navigator class="nav-item active" url="/pages/records/records">记录</navigator>
+    <navigator class="nav-item" url="/pages/curves/curves">曲线</navigator>
+    <navigator class="nav-item" url="/pages/settings/settings">设置</navigator>
+  </view>
+
+  <view class="card">
+    <view class="form-row">
+      <view class="field">
+        试卷
+        <picker range="{{papers}}" range-key="label" value="{{filterIndex}}" bindchange="onFilter">
+          <view class="picker">{{papers[filterIndex].label}}</view>
+        </picker>
+      </view>
+      <button class="btn primary small" bindtap="onNew">新建</button>
+    </view>
+  </view>
+
+  <view wx:if="{{empty}}" class="empty">
+    <view>这个试卷还没有记录</view>
+  </view>
+
+  <view wx:for="{{rows}}" wx:key="id" class="card">
+    <view class="list-row">
+      <view class="main">
+        <view>第 {{item.seq}} 次<text wx:if="{{item.name}}" class="muted">　{{item.name}}</text></view>
+        <view class="tiny">{{item.typeLabel}}<text wx:if="{{item.date}}"> · {{item.date}}</text></view>
+        <view class="tiny">得分 {{item.score}} · 正确率 {{item.pct}} · 用时 {{item.minutes}}</view>
+      </view>
+      <view class="actions">
+        <button class="btn small" data-id="{{item.id}}" data-seq="{{item.seq}}" data-label="{{item.typeLabel}} 第{{item.seq}}次" bindtap="onMove">移动</button>
+        <button class="btn small" data-id="{{item.id}}" bindtap="onEdit">编辑</button>
+        <button class="btn small danger" data-id="{{item.id}}" bindtap="onDelete">删除</button>
+      </view>
+    </view>
+  </view>
+</view>

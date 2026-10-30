@@ -1,0 +1,83 @@
+﻿<view class="container">
+  <view class="nav">
+    <navigator class="nav-item active" url="/pages/index/index">录入</navigator>
+    <navigator class="nav-item" url="/pages/records/records">记录</navigator>
+    <navigator class="nav-item" url="/pages/curves/curves">曲线</navigator>
+    <navigator class="nav-item" url="/pages/settings/settings">设置</navigator>
+  </view>
+
+  <view class="card">
+    <view class="form-row">
+      <view class="field">
+        考试
+        <picker range="{{examTypes}}" value="{{examTypeIndex}}" bindchange="onExamType" disabled="{{editing}}">
+          <view class="picker">{{examTypes[examTypeIndex]}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        试卷
+        <picker range="{{paperNames}}" value="{{paperIndex}}" bindchange="onPaper" disabled="{{editing}}">
+          <view class="picker">{{paperNames[paperIndex]}}</view>
+        </picker>
+      </view>
+      <view class="field">第<input class="small" type="number" value="{{seq}}" bindinput="onSeq" />次</view>
+      <view class="field">
+        日期
+        <picker mode="date" value="{{date}}" bindchange="onDate">
+          <view class="picker">{{date}}</view>
+        </picker>
+      </view>
+      <view class="field">卷名<input value="{{name}}" bindinput="onName" placeholder="可选" /></view>
+      <view class="field">备注<input value="{{note}}" bindinput="onNote" placeholder="可选" /></view>
+    </view>
+  </view>
+
+  <view wx:for="{{modules}}" wx:for-index="mi" wx:for-item="m" wx:key="name" class="card">
+    <view class="card-head">
+      <view class="head-title">
+        <text class="title">{{m.name}}</text>
+        <text class="muted tiny">{{m.qty}} 题 · {{m.full}} 分</text>
+      </view>
+      <text class="right">正确率 {{m.pct}} · 总用时 {{m.time}} 分钟 · {{m.score}}/{{m.full}}分</text>
+    </view>
+
+    <view wx:for="{{m.subtypes}}" wx:for-index="si" wx:for-item="s" wx:key="id" class="row">
+      <view class="name">
+        {{s.name}}
+        <text class="tiny">　共{{s.qty}}题 · 每题{{s.pts}}分</text>
+      </view>
+      <input
+        type="number"
+        value="{{s.correct}}"
+        data-mi="{{mi}}"
+        data-si="{{si}}"
+        data-field="correct"
+        bindinput="onCell"
+      />
+      <text class="muted">/{{s.qty}}</text>
+      <input
+        type="number"
+        value="{{s.minutes}}"
+        data-mi="{{mi}}"
+        data-si="{{si}}"
+        data-field="minutes"
+        bindinput="onCell"
+      />
+      <text class="muted">分钟</text>
+      <text class="out">{{s.pct}}</text>
+    </view>
+  </view>
+
+  <view style="height: 140rpx"></view>
+
+  <view class="summary">
+    <view class="stat"><text>{{totals.score}}</text>/{{full}}分</view>
+    <view class="stat">正确率 <text>{{totals.pct}}</text></view>
+    <view class="stat">总用时 <text>{{totals.minutes}}</text></view>
+    <view class="actions">
+      <button class="btn small" bindtap="onBack">返回</button>
+      <button class="btn primary small" bindtap="onSave">保存</button>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,64 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+  margin: 4rpx 0 10rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
+.range-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  padding: 0 4rpx 6rpx;
+}
+
+.range-row .tiny {
+  color: #6b7280;
+  font-size: 22rpx;
+}
+
+.pick {
+  border: 1rpx solid #e3e6ea;
+  border-radius: 10rpx;
+  padding: 8rpx 14rpx;
+  font-size: 24rpx;
+  color: #1f2328;
+  background: #fff;
+  max-width: 320rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.range-actions {
+  display: flex;
+  gap: 10rpx;
+  margin-left: auto;
+}
+
+.mini-btn {
+  border: 1rpx solid #e3e6ea;
+  border-radius: 999rpx;
+  padding: 6rpx 16rpx;
+  font-size: 22rpx;
+  color: #6b7280;
+  background: #fff;
+}
+
+.range-info {
+  padding: 0 4rpx 10rpx;
+  color: #8a9099;
+}

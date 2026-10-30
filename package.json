@@ -1,0 +1,51 @@
+{
+  "name": "xingce-analyzer-app",
+  "version": "0.3.0",
+  "private": true,
+  "description": "行测模考记录与分析器（本地运行）",
+  "type": "module",
+  "scripts": {
+    "start": "node app/server.mjs",
+    "test": "node --test tests/metrics.test.mjs tests/validate.test.mjs tests/miniprogram-store.test.mjs tests/version.test.mjs tests/report.test.mjs tests/practice.test.mjs tests/tiku-question.test.mjs tests/markdown.test.mjs tests/question-pack.test.mjs",
+    "seed": "python tools/export_seed.py",
+    "build:exe": "node tools/build-exe.mjs",
+    "serve": "node tools/serve-static.mjs",
+    "icons": "python tools/make_icons.py",
+    "build:www": "node tools/build-www.mjs",
+    "build:release": "node tools/build-release.mjs",
+    "bump": "node tools/bump-version.mjs",
+    "build:mp": "node tools/build-miniprogram.mjs",
+    "verify:apk": "node tools/verify-apk.mjs",
+    "pack:tiku": "node tools/export-question-pack.mjs"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "esbuild": "^0.28.2",
+    "postject": "^1.0.0-alpha.6"
+  },
+  "license": "MIT",
+  "author": "kingofluxury",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kingofluxury/1256.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kingofluxury/1256/issues"
+  },
+  "homepage": "https://github.com/kingofluxury/1256#readme",
+  "keywords": [
+    "行测",
+    "公考",
+    "国考",
+    "江苏省考",
+    "模考",
+    "成绩分析",
+    "pwa",
+    "capacitor"
+  ]
+}

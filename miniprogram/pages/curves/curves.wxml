@@ -1,0 +1,67 @@
+﻿<view class="container">
+  <view class="nav">
+    <navigator class="nav-item" url="/pages/index/index">录入</navigator>
+    <navigator class="nav-item" url="/pages/records/records">记录</navigator>
+    <navigator class="nav-item active" url="/pages/curves/curves">曲线</navigator>
+    <navigator class="nav-item" url="/pages/settings/settings">设置</navigator>
+  </view>
+
+  <scroll-view class="tabs" scroll-x enable-flex>
+    <view
+      wx:for="{{tabs}}"
+      wx:key="id"
+      class="tab {{item.id === activeId ? 'active' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onTab"
+    >{{item.label}}</view>
+  </scroll-view>
+
+  <view wx:if="{{empty}}" class="empty">这套试卷还没有记录</view>
+
+  <block wx:if="{{!empty}}">
+    <view class="range-row">
+      <text class="tiny">显示</text>
+      <picker mode="selector" range="{{rangeLabels}}" value="{{fromIndex}}" bindchange="onFrom">
+        <view class="pick">{{fromLabel}}</view>
+      </picker>
+      <text class="tiny">至</text>
+      <picker mode="selector" range="{{rangeLabels}}" value="{{toIndex}}" bindchange="onTo">
+        <view class="pick">{{toLabel}}</view>
+      </picker>
+      <view class="range-actions">
+        <view class="mini-btn" bindtap="onRecent">最近 15 次</view>
+        <view class="mini-btn" bindtap="onAll">全部</view>
+      </view>
+    </view>
+    <view class="tiny muted range-info">{{rangeText}}</view>
+
+    <view class="kpi">
+      <view class="item"><text class="v">{{kpi.pct}}</text><text class="k">区间末次正确率</text></view>
+      <view class="item"><text class="v">{{kpi.minutes}}</text><text class="k">区间末次用时</text></view>
+      <view class="item"><text class="v">{{kpi.count}}</text><text class="k">区间/总次数</text></view>
+    </view>
+
+    <view class="card">
+      <view class="card-head"><text class="title">得分走势</text><text class="muted">每次模考一个点</text></view>
+      <view class="legend" wx:if="{{overview.legend}}">
+        <view wx:for="{{overview.legend}}" wx:for-item="lg" wx:key="name" class="legend-item">
+          <view class="dot" style="background: {{lg.color}}"></view>
+          <text class="tiny">{{lg.name}}</text>
+        </view>
+      </view>
+      <canvas type="2d" id="overview" class="chart"></canvas>
+    </view>
+
+    <view wx:for="{{modules}}" wx:for-item="m" wx:for-index="mi" wx:key="id" class="card">
+      <view class="card-head"><text class="title">{{m.name}}</text><text class="right">{{m.avg}}</text></view>
+      <view class="legend" wx:if="{{m.legend.length > 1}}">
+        <view wx:for="{{m.legend}}" wx:for-item="lg" wx:key="name" class="legend-item">
+          <view class="dot" style="background: {{lg.color}}"></view>
+          <text class="tiny">{{lg.name}}</text>
+        </view>
+      </view>
+      <canvas type="2d" id="c{{mi}}" class="chart"></canvas>
+    </view>
+  </block>
+</view>
+

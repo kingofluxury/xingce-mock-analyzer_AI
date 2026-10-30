@@ -1,0 +1,12 @@
+{
+  "appId": "com.xingce.analyzer",
+  "appName": "行测模考分析器",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#f5f6f8"
+  },
+  "backgroundColor": "#f5f6f8"
+}

@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+def releaseKeystore = file("xingce-release.p12")
+
+// versionCode/Name 由 app/public/shared/version.js 的 APP_VERSION 推导：
+// APP_VERSION = 0.3.0.YYYYMMDDHHmmss -> versionName 用全串，versionCode 用「距 2020-01-01 的分钟数」。
+// 每分钟 +1，单调递增且远小于 int32 上限，改版本只需 npm run bump。
+def appVersionFile = file("${rootProject.projectDir}/../app/public/shared/version.js")
+def appVersionName = "1.0"
+def appVersionCode = 1
+if (appVersionFile.exists()) {
+    def matcher = appVersionFile.text =~ /APP_VERSION\s*=\s*"([0-9]+\.[0-9]+\.[0-9]+)\.(\d{14})"/
+    if (matcher.find()) {
+        appVersionName = matcher.group(1) + "." + matcher.group(2)
+        def stamp = new java.text.SimpleDateFormat("yyyyMMddHHmmss")
+        stamp.setTimeZone(TimeZone.getTimeZone("UTC"))
+        def minutesSinceEpoch = (stamp.parse(matcher.group(2)).time / 60000L) as long
+        appVersionCode = (int) (minutesSinceEpoch - 26297280L)
+    } else {
+        logger.warn("version.js 里没有 APP_VERSION 时间戳，versionCode 回退为 1")
+    }
+} else {
+    logger.warn("找不到 ${appVersionFile}，versionCode 回退为 1")
+}
+
+android {
+    namespace = "com.xingce.analyzer"
+    compileSdk = rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.xingce.analyzer"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode appVersionCode
+        versionName appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile releaseKeystore
+            storeType "PKCS12"
+            storePassword System.getenv("XINGCE_STORE_PASSWORD") ?: "xingce123456"
+            keyAlias System.getenv("XINGCE_KEY_ALIAS") ?: "xingce"
+            keyPassword System.getenv("XINGCE_KEY_PASSWORD") ?: "xingce123456"
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
+

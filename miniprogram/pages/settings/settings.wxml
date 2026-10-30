@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="nav">
+    <navigator class="nav-item" url="/pages/index/index">录入</navigator>
+    <navigator class="nav-item" url="/pages/records/records">记录</navigator>
+    <navigator class="nav-item" url="/pages/curves/curves">曲线</navigator>
+    <navigator class="nav-item active" url="/pages/settings/settings">设置</navigator>
+  </view>
+
+  <view class="card">
+    <view class="card-head"><text class="title">数据</text><text class="muted">共 {{count}} 条记录</text></view>
+    <view class="muted tiny">数据只存在本机微信里，不上传。换手机或清理微信缓存前，请先导出。</view>
+    <view class="hr"></view>
+    <view class="form-row">
+      <button class="btn primary small" bindtap="onExport">导出到剪贴板</button>
+      <button class="btn small" bindtap="onImport">从剪贴板导入</button>
+      <button class="btn danger small" bindtap="onClear">清空全部</button>
+    </view>
+  </view>
+
+  <view wx:for="{{groups}}" wx:key="id" class="card">
+    <view class="card-head">
+      <text class="title">{{item.title}}</text>
+      <text class="muted">{{item.qty}} 题 / {{item.full}} 分</text>
+    </view>
+    <view wx:for="{{item.modules}}" wx:for-item="m" wx:key="name" class="module">
+      <view class="module-head">
+        <text>{{m.name}}</text>
+        <text class="tiny">{{m.qty}} 题 / {{m.full}} 分</text>
+      </view>
+      <view wx:for="{{m.subs}}" wx:for-item="s" wx:key="name" class="sub">
+        <text>{{s.name}}</text>
+        <text class="tiny">{{s.qty}} × {{s.pts}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-head"><text class="title">关于</text></view>
+    <view class="tiny">行测模考分析器（小程序版） v{{version}}</view>
+    <view class="tiny">不提供题库，只处理你自己录入的答对数与用时。</view>
+    <view class="tiny">与桌面版 / 网页版数据不互通。</view>
+  </view>
+
+  <view wx:if="{{importing}}" class="overlay">
+    <view class="overlay-card">
+      <view class="overlay-title">正在导入</view>
+      <view class="overlay-detail">{{importText}}</view>
+      <view class="progress"><view class="bar"></view></view>
+    </view>
+  </view>
+</view>

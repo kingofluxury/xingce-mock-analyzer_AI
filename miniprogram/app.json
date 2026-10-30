@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/records/records",
+    "pages/curves/curves",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "navigationBarTitleText": "行测模考分析器",
+    "navigationBarBackgroundColor": "#3b6fd4",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f6f8",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

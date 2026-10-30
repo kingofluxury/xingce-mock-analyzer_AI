@@ -1,0 +1,60 @@
+name: Bug 报告
+description: 报告一个可复现的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请尽量提供可复现的信息；安全问题请走 SECURITY.md 的私密渠道。
+  - type: textarea
+    id: what
+    attributes:
+      label: 问题描述
+      description: 发生了什么？期望是什么？
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 使用方式
+      options:
+        - Windows exe
+        - 网页版 / PWA
+        - 安卓 APK
+        - 源码运行（npm start）
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      description: 设置页「关于」里的版本号，例如 0.3.0.20261027213621
+    validations:
+      required: true
+  - type: dropdown
+    id: paper
+    attributes:
+      label: 试卷类型
+      options:
+        - 江苏 A/B类
+        - 江苏 C类
+        - 国考副省级
+        - 国考地市级/行政执法类
+        - 与试卷无关
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开录入页
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 截图 / 日志
+      description: 桌面版日志在 data/app.log
+    validations:
+      required: false

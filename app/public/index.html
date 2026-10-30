@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>录入模考 · 行测模考分析器</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#3b6fd4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="行测分析">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">行测<span>模考分析器</span></div>
+    <div class="nav-links">
+      <a href="index.html">录入</a>
+      <a href="practice.html">练习</a>
+      <a href="curves.html">曲线</a>
+      <a href="records.html">记录</a>
+      <a href="settings.html">设置</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-head">
+    <h1 id="title">录入模考</h1>
+    <span class="sub">填答对数和用时，得分与正确率自动算</span>
+  </div>
+  <div id="app"><div class="card muted">正在加载…</div></div>
+</div>
+
+<script type="module" src="js/pwa.js"></script>
+<script type="module" src="js/entry.js"></script>
+</body>
+</html>
