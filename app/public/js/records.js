@@ -1,4 +1,4 @@
-﻿import { getStore } from "./store.js";
+import { getStore } from "./store.js";
 import { fmt, fmtPct, isNum } from "./fmt.js";
 import {
   $,

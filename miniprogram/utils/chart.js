@@ -1,4 +1,4 @@
-﻿const COLORS = ["#3b6fd4", "#e8833a", "#c94f4f", "#4b9b8a", "#8b6bb1", "#b08a2e"];
+const COLORS = ["#3b6fd4", "#e8833a", "#c94f4f", "#4b9b8a", "#8b6bb1", "#b08a2e"];
 const { fmt } = require("./fmt.js");
 
 function draw(canvas, ctx, opts) {

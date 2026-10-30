@@ -1,4 +1,4 @@
-﻿# 更新日志
+# 更新日志
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 构建版本号格式为 `主版本.次版本.修订号.年月日时分秒`，由 `npm run bump` 生成到 `app/public/shared/version.js`。

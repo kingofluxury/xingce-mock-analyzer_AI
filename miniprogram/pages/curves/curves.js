@@ -1,4 +1,4 @@
-﻿const store = require("../../utils/store.js");
+const store = require("../../utils/store.js");
 const chart = require("../../utils/chart.js");
 
 const COLORS = chart.COLORS;

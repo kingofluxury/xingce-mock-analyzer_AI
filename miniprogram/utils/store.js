@@ -1,4 +1,4 @@
-﻿const core = require("./core.js");
+const core = require("./core.js");
 
 const KEY = "xingce:exams";
 const DEFAULT_TYPE = 1;

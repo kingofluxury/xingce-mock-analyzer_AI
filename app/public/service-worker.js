@@ -1,4 +1,4 @@
-﻿const CACHE = "xingce-v3";
+const CACHE = "xingce-v3";
 const ASSETS = [
   "./",
   "./index.html",

@@ -1,4 +1,4 @@
-﻿import test from "node:test";
+import test from "node:test";
 import assert from "node:assert/strict";
 import { subtypesOf, totalsOf, PAPER_TYPES } from "../app/public/shared/domain.js";
 import {

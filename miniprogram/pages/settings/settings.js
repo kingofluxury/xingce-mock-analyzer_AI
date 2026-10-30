@@ -1,4 +1,4 @@
-﻿const store = require("../../utils/store.js");
+const store = require("../../utils/store.js");
 const { APP_VERSION } = require("../../utils/version.js");
 
 Page({
