@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@capacitor/android": "^8.5.3",
-    "@capacitor/cli": "^8.5.3",
+    "@capacitor/cli": "^8.6.0",
     "@capacitor/core": "^8.5.3",
     "esbuild": "^0.28.2",
     "postject": "^1.0.0-alpha.6"
